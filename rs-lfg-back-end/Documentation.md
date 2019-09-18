@@ -3,6 +3,9 @@ Server runs on port 4000
 To Run:
 nodemon run server.js
 
+To Debug: 
+run "Launch RSLFG" configuration in debugger for VSCode
+
 ########## User Manipulation ##########
 
 Get all users:

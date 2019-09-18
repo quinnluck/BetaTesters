@@ -12,7 +12,7 @@ app.use(userRouter)
 
 app.get('/', (request, response) => {
     console.log("responding to root route")
-    response.send("Welcome to Beta Testers!")
+    response.send("Welcome to RS3 Looking for Group!")
     response.end()
 })
 

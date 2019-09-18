@@ -54,6 +54,8 @@ router.get('/user/:id', (request, response) => {
     })
 })
 
+// possible issue here trying to create/update without use of form.html
+// router.post('/user', bodyParser, (request, response) => { ... })
 router.post('/user', (request, response) => {
     console.log("trying to create a new user with variables: " + request.body.username + " " + request.body.combat_level)
     const queryString = `INSERT INTO users (username, combat_level) VALUES (?, ?);;`
@@ -65,10 +67,22 @@ router.post('/user', (request, response) => {
         console.log("created user successfully with Id: " + results.insertId)
 
         response.end()
-
     })
+})
 
-    
+router.delete('/user/:id', (request, response) => {
+    console.log("Trying to delete user with id: " + request.params.id)
+    const queryString = `DELETE FROM users WHERE user_id=${request.params.id}`
+
+    pool.query(queryString, (err, results, fields) => {
+        if(err){
+            handleError(err, "failed to delete user")
+        }
+
+        console.log("successfully deleted user with Id: " + request.params.id)
+
+        response.end()
+    })
 })
 
 module.exports = router
