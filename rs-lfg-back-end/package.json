@@ -4,7 +4,8 @@
   "description": "Website for finding beta testers for your applications, apps, video games, board games, etc.  This website uses ReactJS, Graphql, NodeJS, and MySql.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon --inspect server.js"
   },
   "repository": {
     "type": "git",

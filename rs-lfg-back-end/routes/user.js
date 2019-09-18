@@ -10,12 +10,10 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'betatesters'
+    database: 'rslookingforgroup'
 })
 
-function getDBConnection() {
-    return pool
-}
+
 
 function handleError(err, message) {
     console.log(message + err)
@@ -28,7 +26,7 @@ router.get('/users', (request, response) => {
     console.log("Fetching all users...")
 
     const queryString = "SELECT * FROM users;"
-    getDBConnection().query(queryString, (err, rows, fields) => {
+    pool.query(queryString, (err, rows, fields) => {
         if(err) {
             handleError(err, "failed to fetch all users.")
         }
@@ -42,8 +40,8 @@ router.get('/users', (request, response) => {
 router.get('/user/:id', (request, response) => {
     console.log("getting user with id: " + request.params.id)
 
-    const queryString = `SELECT * FROM users WHERE id=${request.params.id}`
-    getDBConnection().query(queryString, (err, rows, fields) => {
+    const queryString = `SELECT * FROM users WHERE user_id=${request.params.id}`
+    pool.query(queryString, (err, rows, fields) => {
         if(err){
             handleError(err, "failed to fetch user")
         }
@@ -56,11 +54,11 @@ router.get('/user/:id', (request, response) => {
     })
 })
 
-router.post('/create_user', (request, response) => {
-    console.log("trying to create a new user with variables: " + request.body.first_name + " " + request.body.last_name)
-    const queryString = `INSERT INTO users (firstName, lastName) values (?, ?);`
+router.post('/user', (request, response) => {
+    console.log("trying to create a new user with variables: " + request.body.username + " " + request.body.combat_level)
+    const queryString = `INSERT INTO users (username, combat_level) VALUES (?, ?);;`
     
-    getDBConnection().query(queryString, [request.body.first_name, request.body.last_name], (err, results, fields) => {
+    pool.query(queryString, [request.body.username, request.body.combat_level], (err, results, fields) => {
         if(err){
             handleError(err, "failed to create user")
         }
