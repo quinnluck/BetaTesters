@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 
 const router = express.Router()
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({ extended: true }))
 
 const pool = mysql.createPool({
     connectionLimit: 10,
@@ -54,17 +54,41 @@ router.get('/user/:id', (request, response) => {
     })
 })
 
-// possible issue here trying to create/update without use of form.html
-// router.post('/user', bodyParser, (request, response) => { ... })
-router.post('/user', (request, response) => {
+router.put('/user', (request, response) => {
     console.log("trying to create a new user with variables: " + request.body.username + " " + request.body.combat_level)
-    const queryString = `INSERT INTO users (username, combat_level) VALUES (?, ?);;`
+    const queryString = `INSERT INTO users (username, combat_level) VALUES (?, ?);`
     
     pool.query(queryString, [request.body.username, request.body.combat_level], (err, results, fields) => {
         if(err){
             handleError(err, "failed to create user")
         }
         console.log("created user successfully with Id: " + results.insertId)
+
+        response.end()
+    })
+})
+
+router.post('/update/user', (request, response) => {
+    console.log("trying to update a user with id: " + request.body.user_id)
+    const queryString = "UPDATE users SET "
+    if(request.body.username && request.body.combat_level) {
+        queryString += `username = ${request.body.username}, combat_level = ${request.body.combat_level} `
+    } else {
+        if(request.body.username) {
+           queryString += `username = ${request.body.username} `
+        } 
+        if(request.body.combat_level){
+           queryString += `combat_level = ${request.body.combat_level} `
+        }
+    }
+    
+    queryString += ` WHERE user_id = ${request.body.user_id};`
+
+    pool.query(queryString, (err, results, fields) => {
+        if(err){
+            handleError(err, "failed to update user")
+        }
+        console.log("updated user successfully with Id: " + results.insertId)
 
         response.end()
     })
