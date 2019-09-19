@@ -3,11 +3,13 @@ const app = express()
 const morgan = require('morgan')
 
 const userRouter = require('./routes/user.js')
+const groupRouter = require('./routes/group.js')
 
 
 app.use(morgan('short'))
 app.use(express.static('./public'))
 app.use(userRouter)
+app.use(groupRouter)
 
 
 app.get('/', (request, response) => {

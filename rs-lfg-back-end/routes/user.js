@@ -70,12 +70,12 @@ router.put('/user', (request, response) => {
 
 router.post('/update/user', (request, response) => {
     console.log("trying to update a user with id: " + request.body.user_id)
-    const queryString = "UPDATE users SET "
+    let queryString = "UPDATE users SET "
     if(request.body.username && request.body.combat_level) {
-        queryString += `username = ${request.body.username}, combat_level = ${request.body.combat_level} `
+        queryString += `username = "${request.body.username}", combat_level = ${request.body.combat_level} `
     } else {
         if(request.body.username) {
-           queryString += `username = ${request.body.username} `
+           queryString += `username = "${request.body.username}" `
         } 
         if(request.body.combat_level){
            queryString += `combat_level = ${request.body.combat_level} `
@@ -88,7 +88,7 @@ router.post('/update/user', (request, response) => {
         if(err){
             handleError(err, "failed to update user")
         }
-        console.log("updated user successfully with Id: " + results.insertId)
+        console.log("updated user successfully with Id: " + request.body.user_id)
 
         response.end()
     })

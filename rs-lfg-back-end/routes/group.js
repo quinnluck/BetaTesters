@@ -67,15 +67,15 @@ router.put('/group', (request, response) => {
 router.post('/update/group', (request, response) => {
     console.log("Trying to update group with id: " + request.body.group_id)
 
-    const queryString = "UPDATE rs_group SET "
+    let queryString = "UPDATE rs_group SET "
     if(request.body.host_username && request.body.name){
-        queryString += `host_username = ${request.body.host_username}, name = ${reuqest.body.name} `
+        queryString += `host_username = "${request.body.host_username}", name = "${request.body.name}" `
     } else {
         if(request.body.host_username){
-            queryString += `host_username = ${request.body.host_username} `
+            queryString += `host_username = "${request.body.host_username}" `
         }
         if(request.body.name) {
-            queryString += `name = ${request.body.name} `
+            queryString += `name = "${request.body.name}" `
         }
     }
     queryString += `WHERE group_id = ${request.body.group_id}`
@@ -85,7 +85,7 @@ router.post('/update/group', (request, response) => {
             handleError(err, "failed to update group with id: " + request.body.group_id)
         }
 
-        console.log("Group successfully updated with id: " + results.insertId)
+        console.log("Group successfully updated with id: " + request.body.group_id)
         response.end()
     })
 })
