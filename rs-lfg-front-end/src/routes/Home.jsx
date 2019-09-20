@@ -1,6 +1,6 @@
 import React from 'react'
-import Users from './Users'
-import Groups from './Groups'
+import Users from '../components/CharacterClaimBox'
+import Groups from '../components/CreateGroupBox'
 
 export default class Home extends React.Component{
 
