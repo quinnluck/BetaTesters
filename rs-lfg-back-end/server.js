@@ -1,11 +1,12 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const cors = require('cors')
 
 const userRouter = require('./routes/user.js')
 const groupRouter = require('./routes/group.js')
 
-
+app.use(cors())
 app.use(morgan('short'))
 app.use(express.static('./public'))
 app.use(userRouter)

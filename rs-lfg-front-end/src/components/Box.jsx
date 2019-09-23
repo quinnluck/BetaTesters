@@ -11,7 +11,7 @@ const StyledBox = styled.div`
 export default class Box extends React.Component{
     render() {
         return(
-            <StyledBox>{this.props.children}</StyledBox>
+            <StyledBox {...this.props}>{this.props.children}</StyledBox>
         )
     }
 }

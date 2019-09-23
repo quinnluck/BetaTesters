@@ -13,7 +13,7 @@ const StyledSpan = styled.span`
 export default class Label extends React.Component {
     render() {
         return(
-            <StyledSpan>{this.props.children}</StyledSpan>
+            <StyledSpan {...this.props}>{this.props.children}</StyledSpan>
         )
     }
 }

@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
 export default class LinearLayout extends React.Component {
     render(){
         return(
-            <StyledDiv>{this.props.children}</StyledDiv>
+            <StyledDiv {...this.props}>{this.props.children}</StyledDiv>
         )
     }
 }
