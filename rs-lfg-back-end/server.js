@@ -5,12 +5,14 @@ const cors = require('cors')
 
 const userRouter = require('./routes/user.js')
 const groupRouter = require('./routes/group.js')
+const rsRouter = require('./routes/rsService')
 
 app.use(cors())
 app.use(morgan('short'))
 app.use(express.static('./public'))
 app.use(userRouter)
 app.use(groupRouter)
+app.use(rsRouter)
 
 
 app.get('/', (request, response) => {

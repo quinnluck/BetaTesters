@@ -66,21 +66,15 @@ export default class Users extends React.Component {
     }
 
     _lookupStats = () => {
-        let usernameFormatted = this.state.username.split(' ').join('_')
-        // RsApi.rs.hiscores.player(usernameFormatted).then(res => logInfo(res.data))
-        Axios.get('https://secure.runescape.com/m=hiscore/index_lite.ws?player=leptu_x').then(res => console.log(res.data))
-        API.get('/users').then(res => console.log(res.data))
-        // return API.get("/users").then((request, response) => {
-        //     console.log(response)
-        // })
+        API.get(`/player/${this.state.username}`).then(res => console.log(res.data))
     }
 }
 
 
-function logInfo(info) {
-    var skills = info.skills, activities = info.activities, maxed = info.maxed;
+// function logInfo(info) {
+//     var skills = info.skills, activities = info.activities, maxed = info.maxed;
 
-    console.log("skills: " + skills);
-    console.log("isMaxed: " + maxed)
-    console.log("activities: " + activities)
-}
+//     console.log("skills: " + skills);
+//     console.log("isMaxed: " + maxed)
+//     console.log("activities: " + activities)
+// }
