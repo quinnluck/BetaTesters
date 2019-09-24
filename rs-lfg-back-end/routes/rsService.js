@@ -16,6 +16,13 @@ router.get('/player/:username', (request, response) => {
         console.log("status code: " + res && res.statusCode)
         console.log("body: " + body)
 
+        var stats = body.split('\n')
+        // console.log(stats)
+        var skills = stats.map(stat => {
+            var skill = stat.split(',')
+            return skill[1]
+        }, {})
+
         response.json(body)
         response.end()
     })    

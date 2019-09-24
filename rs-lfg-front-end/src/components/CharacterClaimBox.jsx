@@ -6,6 +6,10 @@ import Label from './Label'
 import LinearLayout from './LinearLayout'
 import Button from './Button'
 import API from '../utils/API';
+import IconLevel from './skill-components/IconLevel'
+
+import AgilityPng from '../images/Agility-icon.png'
+import SkillTemplate from './skill-components/SkillTemplate'
 
 
 const StyledHr = styled.hr`
@@ -53,6 +57,8 @@ export default class CharacterClaimBox extends React.Component {
                         </StyledButtonWrapper>
                     </LinearLayout>
                 </StyledBox>
+                <IconLevel icon={AgilityPng} level={75}/>
+                <SkillTemplate />
             </React.Fragment>
         )
     }
@@ -64,7 +70,7 @@ export default class CharacterClaimBox extends React.Component {
     }
 
     _lookupStats = () => {
-        API.get(`/player/${this.state.usernam}`).then(res => console.log(res.data))
+        API.get(`/player/${this.state.username}`).then(res => console.log(res.data))
 
         //parse and set state with player info
     }
