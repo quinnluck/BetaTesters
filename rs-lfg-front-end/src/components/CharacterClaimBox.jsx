@@ -6,8 +6,6 @@ import Label from './Label'
 import LinearLayout from './LinearLayout'
 import Button from './Button'
 import API from '../utils/API';
-import RsApi from "runescape-api"
-import Axios from 'axios'
 
 
 const StyledHr = styled.hr`
@@ -66,15 +64,8 @@ export default class Users extends React.Component {
     }
 
     _lookupStats = () => {
-        API.get(`/player/${this.state.username}`).then(res => console.log(res.data))
+        API.get(`/player/${this.state.usernam}`).then(res => console.log(res.data))
+
+        //parse and set state with player info
     }
 }
-
-
-// function logInfo(info) {
-//     var skills = info.skills, activities = info.activities, maxed = info.maxed;
-
-//     console.log("skills: " + skills);
-//     console.log("isMaxed: " + maxed)
-//     console.log("activities: " + activities)
-// }
