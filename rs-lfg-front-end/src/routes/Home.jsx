@@ -1,14 +1,14 @@
 import React from 'react'
-import Users from '../components/CharacterClaimBox'
-import Groups from '../components/CreateGroupBox'
+import CharacterClaimBox from '../components/CharacterClaimBox'
+import CreateGroupBox from '../components/CreateGroupBox'
 
 export default class Home extends React.Component{
 
     render() {
         return(
             <React.Fragment>
-                <Users />
-                <Groups />
+                <CharacterClaimBox />
+                <CreateGroupBox />
             </React.Fragment>
         )
     }

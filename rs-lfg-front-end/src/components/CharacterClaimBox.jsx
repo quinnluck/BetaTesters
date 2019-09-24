@@ -26,7 +26,7 @@ const StyledButtonWrapper = styled.div`
     align-items: center;
 `
 
-export default class Users extends React.Component {
+export default class CharacterClaimBox extends React.Component {
     constructor(props) {
         super(props)
 
