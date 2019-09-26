@@ -8,7 +8,6 @@ import Button from './Button'
 import API from '../utils/API';
 import IconLevel from './skill-components/IconLevel'
 
-import AgilityPng from '../images/Agility-icon.png'
 import SkillTemplate from './skill-components/SkillTemplate'
 
 
@@ -57,7 +56,6 @@ export default class CharacterClaimBox extends React.Component {
                         </StyledButtonWrapper>
                     </LinearLayout>
                 </StyledBox>
-                <IconLevel icon={AgilityPng} level={75}/>
                 <SkillTemplate />
             </React.Fragment>
         )
