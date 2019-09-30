@@ -16,7 +16,6 @@ const StyledSpan = styled.span`
     font-variant: small-caps;
     letter-spacing: 1.5px;
     margin-left: 10px;
-    margin-right: 10px;
 `
 
 

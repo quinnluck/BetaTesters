@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledBox = styled.div`
+const StyledDiv = styled.div`
     display: flex;
-    width: 100vh;
+    width: 150vh;
     border: 1px solid #000;
     border-radius: 5px;
 `
@@ -11,7 +11,7 @@ const StyledBox = styled.div`
 export default class Box extends React.Component{
     render() {
         return(
-            <StyledBox {...this.props}>{this.props.children}</StyledBox>
+            <StyledDiv {...this.props}>{this.props.children}</StyledDiv>
         )
     }
 }
