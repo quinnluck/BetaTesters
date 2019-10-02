@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import API from '../utils/API';
 
 import Box from './Box'
 import Label from './Label'
 import LinearLayout from './LinearLayout'
 import Button from './Button'
-import API from '../utils/API';
-
 import SkillTemplate from './skill-components/SkillTemplate'
 
 
@@ -37,7 +36,7 @@ const StyledLinearLayout = styled(LinearLayout)`
 const StyledSkillTemplate = styled(SkillTemplate)`
     display: flex;
     justify-content: center;
-    width: 80%;
+    width: max-content;
 `
 
 const StyledErrorMessage = styled(Label)`
@@ -62,12 +61,12 @@ export default class CharacterClaimBox extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Label>Step 1: Lookup Character</Label>
+                <Label>Character Lookup</Label>
                 <StyledBox>
                     <StyledLinearLayout>
                         <div>
                             <Label>Username (In game name):</Label>
-                            <input onChange={this._onChangeUsername}></input>
+                            <input onChange={this._onChangeUsername} />
                         </div>
                         <StyledHr />
                         <StyledSpacer>
