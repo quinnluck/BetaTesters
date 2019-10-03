@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 import Box from './Box'
 import Label from './Label'
-import LinearLayout from './LinearLayout'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 
 
 const StyledBox = styled(Box)`
@@ -61,11 +62,14 @@ export default class CreateGroupBox extends React.Component{
                         </ToggleButtonGroup>
                     </StyledExperienceGroup>
 
-                    <StyledLfgBox>
-                        <div>
-                            LOOKING FOR GROUP / LOOKING FOR MORE
-                        </div>
-                    </StyledLfgBox>
+                        <Tabs defaultActiveKey="lfg" variant="tabs">
+                            <Tab eventKey="lfg" title="Looking for Group">
+                                Looking For Group
+                            </Tab>
+                            <Tab eventKey="lfm" title="Looking for More">
+                                Looking for More
+                            </Tab>
+                        </Tabs>
                 </StyledBox>
             </React.Fragment>
         )
