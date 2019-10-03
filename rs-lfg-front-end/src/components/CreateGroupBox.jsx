@@ -4,49 +4,68 @@ import styled from 'styled-components'
 import Box from './Box'
 import Label from './Label'
 import LinearLayout from './LinearLayout'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import ToggleButton from 'react-bootstrap/ToggleButton'
+
 
 const StyledBox = styled(Box)`
     justify-content: center;
 `
 
-const StyledLinearLayout = styled(LinearLayout)`
-    width: 100%;
+const StyledLfgBox = styled(Box)`
+    justify-content: center;
+    width: 90vh;
+`
+
+const StyledInputGroup = styled(InputGroup)`
+    padding: 10px;
+    width: 40vh;
+    align-items: center;
+`
+
+const StyledExperienceGroup = styled(InputGroup)`
+    padding: 10px;
+    width: 40vh;
+    justify-content: center;
 `
 
 export default class CreateGroupBox extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <Label>Set up a Group</Label>
+                <Label>Group Setup</Label>
                 <StyledBox>
-                    <StyledLinearLayout>
-                        <div>
-                            <Label>Host:</Label>
-                            <input />
-                        </div>
-                        <div>
-                            <Label>Activity:</Label>
-                            <input />
-                        </div>
-                        <div>
-                            <Label>Notes:</Label>
-                            <input />
-                        </div>
-                        <div>
-                            <Label>Experience:</Label>
-                            <div>
-                                <Label>Sherpa</Label>
-                                <input type="checkbox" name="Sherpa" />
-                            </div>
-                            <div>
-                                <Label>Novice</Label>
-                                <input type="checkbox" name="Novice" />
-                            </div>
-                        </div>
+                    <StyledInputGroup size="sm">
+                        <Label>Host:</Label>
+                        <FormControl />
+                    </StyledInputGroup>
+
+                    <StyledInputGroup size="sm">
+                        <Label>Activity:</Label>
+                        <FormControl />
+                    </StyledInputGroup>
+
+                    <StyledInputGroup size="sm">
+                        <Label>Notes:</Label>
+                        <FormControl />
+                    </StyledInputGroup>
+
+                    <StyledExperienceGroup size="sm">
+                        <Label>Experience:</Label>
+                        <ToggleButtonGroup type="radio" name="sherpa-novice">
+                            <ToggleButton variant="outline-warning" value={1}>Sherpa</ToggleButton>
+                            <ToggleButton variant="outline-primary" value={2}>Intermediate</ToggleButton>
+                            <ToggleButton variant="outline-success" value={3}>Novice</ToggleButton>
+                        </ToggleButtonGroup>
+                    </StyledExperienceGroup>
+
+                    <StyledLfgBox>
                         <div>
                             LOOKING FOR GROUP / LOOKING FOR MORE
                         </div>
-                    </StyledLinearLayout>
+                    </StyledLfgBox>
                 </StyledBox>
             </React.Fragment>
         )

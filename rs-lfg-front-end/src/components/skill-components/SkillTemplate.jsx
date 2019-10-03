@@ -32,17 +32,13 @@ import InventionPng from '../../images/Invention-icon.png'
 
 
 
-
-
-
-
 const StyledTemplate = styled.div`
     border: 1px solid #000;
     border-radius: 2.5px;
-    background: #CCD2A1;
-    background: -moz-radial-gradient(center, #CCD2A1 0%, #737C5A 50%, #252525 100%);
-    background: -webkit-radial-gradient(center, #CCD2A1 0%, #737C5A 50%, #252525 100%);
-    background: radial-gradient(ellipse at center, #CCD2A1 0%, #737C5A 50%, #252525 100%);
+    background: #CC9966;
+    background: -moz-radial-gradient(center, #CC9966 0%, #9B744D 50%, #3F3F3F 100%);
+    background: -webkit-radial-gradient(center, #CC9966 0%, #9B744D 50%, #3F3F3F 100%);
+    background: radial-gradient(ellipse at center, #CC9966 0%, #9B744D 50%, #3F3F3F 100%);
 `
 
 const StyledRow = styled.div`
@@ -95,6 +91,9 @@ const SkillTemplate = props => (
                 <StyledRow><IconLevel icon={AttackPng} level={props.attacklvl}/></StyledRow>
                 <StyledRow><IconLevel icon={StrengthPng} level={props.strengthlvl} /></StyledRow>
                 <StyledRow><IconLevel icon={DefencePng} level={props.defencelvl} /></StyledRow>
+            </StyledColumn>
+
+            <StyledColumn>
                 <StyledRow><IconLevel icon={HpPng} level={props.hplvl} /></StyledRow>
                 <StyledRow><IconLevel icon={RangedPng} level={props.rangedlvl} /></StyledRow>
                 <StyledRow><IconLevel icon={PrayerPng} level={props.prayerlvl} /></StyledRow>
@@ -104,6 +103,9 @@ const SkillTemplate = props => (
                 <StyledRow><IconLevel icon={MagicPng} level={props.magiclvl} /></StyledRow>
                 <StyledRow><IconLevel icon={CookingPng} level={props.cookinglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={WcPng} level={props.wclvl} /></StyledRow>
+            </StyledColumn>
+
+            <StyledColumn>
                 <StyledRow><IconLevel icon={FletchingPng} level={props.fletchinglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={FishingPng} level={props.fishinglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={FmPng} level={props.fmlvl} /></StyledRow>
@@ -113,6 +115,9 @@ const SkillTemplate = props => (
                 <StyledRow><IconLevel icon={CraftingPng} level={props.craftinglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={SmithingPng} level={props.smithinglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={MiningPng} level={props.mininglvl} /></StyledRow>
+            </StyledColumn>
+
+            <StyledColumn>
                 <StyledRow><IconLevel icon={HerblorePng} level={props.herblorelvl} /></StyledRow>
                 <StyledRow><IconLevel icon={AgilityPng} level={props.agilitylvl} /></StyledRow>
                 <StyledRow><IconLevel icon={ThievingPng} level={props.thievinglvl} /></StyledRow>
@@ -122,6 +127,9 @@ const SkillTemplate = props => (
                 <StyledRow><IconLevel icon={SlayerPng} level={props.slayerlvl} /></StyledRow>
                 <StyledRow><IconLevel icon={FarmingPng} level={props.farminglvl} /></StyledRow>
                 <StyledRow><IconLevel icon={RcPng} level={props.rclvl} /></StyledRow>
+            </StyledColumn>
+
+            <StyledColumn>
                 <StyledRow><IconLevel icon={HunterPng} level={props.hunterlvl} /></StyledRow>
                 <StyledRow><IconLevel icon={ConstructionPng} level={props.constructionlvl} /></StyledRow>
                 <StyledRow><IconLevel icon={SummoningPng} level={props.summoninglvl} /></StyledRow>

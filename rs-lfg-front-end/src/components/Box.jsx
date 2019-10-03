@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const StyledDiv = styled.div`
     display: flex;
+    flex-wrap: wrap;
     width: 100vh;
     border: 1px solid #000;
     border-radius: 5px;

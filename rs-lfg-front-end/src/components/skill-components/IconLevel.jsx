@@ -11,11 +11,13 @@ const StyledImg = styled.img`
     align-self: center;
 `
 
-const StyledSpan = styled.span`
+const StyledSpan = styled.p`
     font-family: "Trebuchet MS";
     font-variant: small-caps;
+    font-size: 20px;
     letter-spacing: 1.5px;
     margin-left: 10px;
+    margin-bottom: unset;
 `
 
 
