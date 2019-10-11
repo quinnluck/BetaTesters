@@ -9,6 +9,8 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import Button from 'react-bootstrap/Button'
+
 
 
 const StyledBox = styled(Box)`
@@ -33,6 +35,14 @@ const StyledExperienceGroup = styled(InputGroup)`
 `
 
 export default class CreateGroupBox extends React.Component{
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            counterValue: 1
+        }
+    }
+
     render(){
         return(
             <React.Fragment>
@@ -61,17 +71,68 @@ export default class CreateGroupBox extends React.Component{
                             <ToggleButton variant="outline-success" value={3}>Novice</ToggleButton>
                         </ToggleButtonGroup>
                     </StyledExperienceGroup>
-
-                        <Tabs defaultActiveKey="lfg" variant="tabs">
-                            <Tab eventKey="lfg" title="Looking for Group">
-                                Looking For Group
-                            </Tab>
+                    
+                    <div>
+                        <Tabs defaultActiveKey="lfm" variant="tabs">
                             <Tab eventKey="lfm" title="Looking for More">
-                                Looking for More
+                                <Label>Members needed: </Label>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Prepend>
+                                        <Button 
+                                            variant="info" 
+                                            size="sm"
+                                            onClick={() => this._addToCounter(1)}
+                                        >
+                                            +
+                                        </Button>
+                                    </InputGroup.Prepend>
+                                    <FormControl value={this.state.counterValue} aria-label="Amount (to the nearest dollar)" />
+                                    <InputGroup.Append>
+                                        <Button 
+                                            variant="info" 
+                                            size="sm"
+                                            onClick={() => this._addToCounter(-1)}
+                                        >
+                                            -
+                                        </Button>
+                                    </InputGroup.Append>
+                                </InputGroup>
+
+                                <Button
+                                    variant="info"
+                                    size="sm"
+                                >
+                                    Post my group
+                                </Button>
+                            </Tab>
+                            <Tab eventKey="lfg" title="Looking for Group">
+                                <Label>Character description: </Label>
+                                <InputGroup>
+                                    <FormControl as="textarea" />
+                                </InputGroup>
+                                <Button
+                                    variant="info"
+                                    size="sm"
+                                >
+                                    Post my character
+                                </Button>
                             </Tab>
                         </Tabs>
+                    </div>
                 </StyledBox>
             </React.Fragment>
         )
+    }
+
+    _addToCounter = (value) => {
+        if(value < 0) {
+            if(this.state.counterValue > 1) {
+                this.setState({ counterValue: this.state.counterValue + value })
+            }
+        } else {
+            if(this.state.counterValue < 10) {
+                this.setState({ counterValue: this.state.counterValue + value })
+            }
+        }
     }
 }
