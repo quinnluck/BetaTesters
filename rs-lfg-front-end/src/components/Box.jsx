@@ -1,18 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
+import { withStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
-const StyledDiv = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vh;
-    border: 1px solid #000;
-    border-radius: 5px;
-`
+
+const FlexContainer = withStyles({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        border: '1px solid #000',
+        borderRadius: '5px',
+        alignContent: 'center',
+        width: '100%'
+    }
+})(Container);
 
 export default class Box extends React.Component{
     render() {
         return(
-            <StyledDiv {...this.props}>{this.props.children}</StyledDiv>
+            <FlexContainer maxWidth="md" {...this.props}>{this.props.children}</FlexContainer>
         )
     }
 }

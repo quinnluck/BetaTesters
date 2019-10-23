@@ -1,57 +1,109 @@
 import React from 'react'
-import styled from 'styled-components'
 import API from '../utils/API';
+
+import { withStyles } from '@material-ui/core/styles';
+import {
+    Container,
+    Grid,
+    Button,
+    TextField
+} from '@material-ui/core';
 
 import Box from './Box'
 import Label from './Label'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
 import SkillTemplate from './skill-components/SkillTemplate'
 
 
-const StyledHr = styled.hr`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border: 1px solid #000;
-    background-color: #000;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-`
-
-const StyledBox = styled(Box)`
-    justify-content: center;
-`
-
-const StyledSpacer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 10px;
-    width: 100%;
-`
-
-const StyledSkillTemplate = styled(SkillTemplate)`
-    display: flex;
-    justify-content: center;
-    width: max-content;
-`
-
-const StyledErrorMessage = styled(Label)`
-    font-size: 16px;
-    margin-bottom: 10px;
-`
-
-const StyledInputGroup = styled(InputGroup)`
-    padding: 10px;
-    width: 70vh;
-    align-items: center;
-`
 
 
-export default class CharacterClaimBox extends React.Component {
+// const StyledHr = styled.hr`
+//     display: flex;
+//     flex-direction: row;
+//     width: 100%;
+//     border: 1px solid #000;
+//     background-color: #000;
+//     margin-right: 5px;
+//     margin-top: 5px;
+//     margin-bottom: 10px;
+// `
+
+// const StyledBox = styled(Box)`
+//     justify-content: center;
+// `
+
+// const StyledSpacer = styled.div`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     padding-bottom: 10px;
+//     width: 100%;
+// `
+
+// const StyledSkillTemplate = styled(SkillTemplate)`
+//     display: flex;
+//     justify-content: center;
+//     width: max-content;
+// `
+
+// const StyledErrorMessage = styled(Label)`
+//     font-size: 16px;
+//     margin-bottom: 10px;
+// `
+
+const styles = ({
+    root: {
+        marginTop: '5%',
+        backgroundColor: '#2D323B',
+        border: '1px solid #000',
+        borderRadius: '5px',
+    },
+    space: {
+        margin: '10px'
+    },
+    skill_template: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: 'max-content'
+    },
+    stats_button: {
+        backgroundColor: "#005580",
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#00699E',
+        },
+        '&.Mui-disabled': {
+            color: '#747474',
+            backgroundColor: '#A6A6A6'
+        }
+    }
+});
+
+const CssTextField = withStyles({
+    root: {
+        borderRadius: 4,
+        backgroundColor: 'white',
+        color: '#0092DB',
+        '& label.Mui-focused': {
+            color: 'black',
+        },
+        '& .MuiFilledInput-underline:after': {
+            borderBottomColor: '#0092DB',
+        },
+        '& .MuiFilledInput-root': {
+            '& fieldset': {
+                borderColor: 'black',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#0092DB',
+            },
+        },
+    },
+})(TextField);
+
+
+
+
+class CharacterClaimBox extends React.Component {
     constructor(props) {
         super(props)
 
@@ -67,29 +119,42 @@ export default class CharacterClaimBox extends React.Component {
     }
 
     render() {
+        var { classes } = this.props
+
         return (
-            <React.Fragment>
+            <Container className={classes.root} maxWidth="md">
                 <Label>Character Lookup</Label>
-                <StyledBox>
-                    <StyledInputGroup size="sm">
-                        <Label>Username (in game name):</Label>
-                        <FormControl onChange={this._onChangeUsername} />
-                    </StyledInputGroup>
-                    <StyledHr />
-                    <StyledSpacer>
-                        <Button
-                            variant="info"
-                            size="sm"
-                            onClick={this._lookupStats}
-                            disabled={this.state.usernameInput === ''}
-                        >
-                            Look up Stats
+
+                <Box className={classes.space}>
+                    <Grid container direction="row" justify="center" alignItems="center">
+                        <Grid item xs={5}>
+                            <CssTextField
+                                id="outlined-char-name"
+                                label="Username (in game name)"
+                                onChange={(e) => this.setState({ usernameInput: e.target.value })}
+                                value={this.state.usernameInput}
+                                margin="normal"
+                                variant="filled"
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Button
+                                className={classes.stats_button}
+                                variant="contained"
+                                color="primary"
+                                onClick={this._lookupStats}
+                                disabled={this.state.usernameInput === ''}
+                            >
+                                Look up Stats
                             </Button>
-                    </StyledSpacer>
+                        </Grid>
+                    </Grid>
+
+                        
                     <div>
                         {this.state.playerStats && this.state.username &&
-                            <StyledSpacer>
-                                <StyledSkillTemplate
+                                <SkillTemplate
+                                    className={classes.skill_template}
                                     characterName={this.state.username.charAt(0).toUpperCase() + this.state.username.slice(1)}
                                     combatlvl={this._calculateCombat(
                                         this.state.playerStats[1][1],
@@ -131,15 +196,14 @@ export default class CharacterClaimBox extends React.Component {
                                     divlvl={this.state.playerStats[26][1]}
                                     inventionlvl={this.state.playerStats[27][1]}
                                 />
-                            </StyledSpacer>
                         }
                         {this.state.errorMessage &&
-                            <StyledErrorMessage>{this.state.errorMessage}</StyledErrorMessage>
+                            <Label>{this.state.errorMessage}</Label>
                         }
                     </div>
 
-                </StyledBox>
-            </React.Fragment>
+                </Box>
+            </Container>
         )
     }
 
@@ -172,3 +236,5 @@ export default class CharacterClaimBox extends React.Component {
         return Math.floor(((1.3 * Math.max((parseInt(atk) + parseInt(str)), (2*parseInt(mage)), (2*parseInt(range)))) + parseInt(def) + parseInt(hp) + Math.floor(.5 * parseInt(summ)) + Math.floor(.5 * parseInt(prayer))) / 4)
     }
 }
+
+export default withStyles(styles)(CharacterClaimBox)
