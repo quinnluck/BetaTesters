@@ -63,7 +63,10 @@ const styles = ({
     skill_template: {
         display: 'flex',
         justifyContent: 'center',
-        width: 'max-content'
+    },
+    skill_template_wrapper: {
+        paddingBottom: '10px',
+        paddingTop: '5px'
     },
     stats_button: {
         backgroundColor: "#005580",
@@ -75,6 +78,9 @@ const styles = ({
             color: '#747474',
             backgroundColor: '#A6A6A6'
         }
+    },
+    error_label: {
+        fontSize: '16px',
     }
 });
 
@@ -125,7 +131,7 @@ class CharacterClaimBox extends React.Component {
             <Container className={classes.root} maxWidth="md">
                 <Label>Character Lookup</Label>
 
-                <Box className={classes.space}>
+                {/* <Box className={classes.space}> */}
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Grid item xs={5}>
                             <CssTextField
@@ -151,7 +157,7 @@ class CharacterClaimBox extends React.Component {
                     </Grid>
 
                         
-                    <div>
+                    <div className={classes.skill_template_wrapper}>
                         {this.state.playerStats && this.state.username &&
                                 <SkillTemplate
                                     className={classes.skill_template}
@@ -198,11 +204,11 @@ class CharacterClaimBox extends React.Component {
                                 />
                         }
                         {this.state.errorMessage &&
-                            <Label>{this.state.errorMessage}</Label>
+                            <Label className={classes.error_label}>{this.state.errorMessage}</Label>
                         }
                     </div>
 
-                </Box>
+                {/* </Box> */}
             </Container>
         )
     }
