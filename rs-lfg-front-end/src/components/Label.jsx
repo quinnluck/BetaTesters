@@ -6,7 +6,6 @@ const StyledSpan = styled.p`
     font-size: 25px;
     font-variant: small-caps;
     letter-spacing: 1.5px;
-    padding-right: 10px;
     margin: unset;
 `
 

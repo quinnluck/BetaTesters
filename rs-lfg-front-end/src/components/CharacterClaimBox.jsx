@@ -9,46 +9,10 @@ import {
     TextField
 } from '@material-ui/core';
 
-import Box from './Box'
 import Label from './Label'
 import SkillTemplate from './skill-components/SkillTemplate'
 
 
-
-
-// const StyledHr = styled.hr`
-//     display: flex;
-//     flex-direction: row;
-//     width: 100%;
-//     border: 1px solid #000;
-//     background-color: #000;
-//     margin-right: 5px;
-//     margin-top: 5px;
-//     margin-bottom: 10px;
-// `
-
-// const StyledBox = styled(Box)`
-//     justify-content: center;
-// `
-
-// const StyledSpacer = styled.div`
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding-bottom: 10px;
-//     width: 100%;
-// `
-
-// const StyledSkillTemplate = styled(SkillTemplate)`
-//     display: flex;
-//     justify-content: center;
-//     width: max-content;
-// `
-
-// const StyledErrorMessage = styled(Label)`
-//     font-size: 16px;
-//     margin-bottom: 10px;
-// `
 
 const styles = ({
     root: {
@@ -97,7 +61,7 @@ const CssTextField = withStyles({
         },
         '& .MuiFilledInput-root': {
             '& fieldset': {
-                borderColor: 'black',
+                borderColor: 'black', 
             },
             '&.Mui-focused fieldset': {
                 borderColor: '#0092DB',
@@ -131,7 +95,6 @@ class CharacterClaimBox extends React.Component {
             <Container className={classes.root} maxWidth="md">
                 <Label>Character Lookup</Label>
 
-                {/* <Box className={classes.space}> */}
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Grid item xs={5}>
                             <CssTextField
@@ -208,7 +171,6 @@ class CharacterClaimBox extends React.Component {
                         }
                     </div>
 
-                {/* </Box> */}
             </Container>
         )
     }

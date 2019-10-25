@@ -87,7 +87,7 @@ class Home extends React.Component{
                 <AppBarBlack defaultValue={this.state.tabSelected} position="absolute" >
                     <Grid container justify="center" alignItems="center" spacing={0}>
                         <Grid className={classes.image} item xs={3}>
-                            <img className={classes.img} src={RSlogo} />
+                            <img alt="" className={classes.img} src={RSlogo} />
                             <Label>Runescape LFG</Label>
                         </Grid>
                         <Grid item xs={6}>
@@ -109,11 +109,19 @@ class Home extends React.Component{
                     </Grid>
                 </AppBarBlack>
                 
-                <Container className={classes.content} maxWidth="md">
-                    <CharacterClaimBox />
-                    <CreateGroupBox />
-                    <GroupListings />
-                </Container>
+                {this.state.tabSelected === "rs3" &&
+                    <Container className={classes.content} maxWidth="md">
+                        <CharacterClaimBox />
+                        <CreateGroupBox />
+                        <GroupListings />
+                    </Container>
+                }
+
+                {this.state.tabSelected === "osrs" &&
+                    <Container className={classes.content}>
+                        <Label>Coming soon!</Label>
+                    </Container>
+                }
             </React.Fragment>
         )
     }
