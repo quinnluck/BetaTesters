@@ -13,7 +13,7 @@ import {
     RadioGroup
 } from '@material-ui/core';
 
-import Label from './Label'
+import Label from './shared-components/Label'
 
 
 
@@ -86,7 +86,7 @@ const SherpaButton = withStyles({
 
 
 
-const styles = ({
+const styles = {
     root: {
         marginTop: '5%',
         backgroundColor: '#2D323B',
@@ -119,7 +119,7 @@ const styles = ({
             backgroundColor: '#A6A6A6'
         }
     },
-});
+};
 
 class CreateGroupBox extends React.Component{
     constructor(props) {

@@ -9,12 +9,12 @@ import {
     TextField
 } from '@material-ui/core';
 
-import Label from './Label'
+import Label from './shared-components/Label'
 import SkillTemplate from './skill-components/SkillTemplate'
 
 
 
-const styles = ({
+const styles = {
     root: {
         marginTop: '5%',
         backgroundColor: '#2D323B',
@@ -45,8 +45,11 @@ const styles = ({
     },
     error_label: {
         fontSize: '16px',
+    },
+    character_name_box: {
+        width: '220px'
     }
-});
+};
 
 const CssTextField = withStyles({
     root: {
@@ -98,6 +101,7 @@ class CharacterClaimBox extends React.Component {
                     <Grid container direction="row" justify="center" alignItems="center">
                         <Grid item xs={5}>
                             <CssTextField
+                                className={classes.character_name_box}
                                 id="outlined-char-name"
                                 label="Username (in game name)"
                                 onChange={(e) => this.setState({ usernameInput: e.target.value })}

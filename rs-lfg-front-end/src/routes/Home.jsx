@@ -15,8 +15,8 @@ import {
 import OsrsPng from '../images/osrs-logo.png'
 import Rs3Png from '../images/runescape3-icon.jpg'
 import RSlogo from '../images/RsLogo.png'
-import SmallLogo from '../components/SmallLogo'
-import Label from '../components/Label'
+import SmallLogo from '../components/shared-components/SmallLogo'
+import Label from '../components/shared-components/Label'
 
 const styles = ({
     root: {

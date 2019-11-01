@@ -6,7 +6,9 @@ const styles = ({
     root: {
         display: 'flex',
         justifyContent: 'space-between',
-        minWidth: '100%'
+        minWidth: '100%',
+        marginTop: '2.5px',
+        marginBottom: '2.5px'
     },
     img: {
         alignSelf: 'center'
@@ -16,9 +18,9 @@ const styles = ({
         fontVariant: 'small-caps',
         fontSize: '20px',
         letterSpacing: '1.5px',
-        marginLeft: '10px',
+        marginLeft: 'unset',
         marginBottom: 'unset',
-        marginTop: '5px'
+        marginTop: 'unset'
     }
 });
 
