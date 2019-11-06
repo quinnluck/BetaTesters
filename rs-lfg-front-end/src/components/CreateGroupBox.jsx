@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 
 import Label from './shared-components/Label'
+import API from "../utils/API";
 
 
 
@@ -151,7 +152,6 @@ class CreateGroupBox extends React.Component{
                                         <CssTextField
                                             id="standard-host"
                                             label="Host*"
-                                            className={classes.textField}
                                             value={this.state.hostName}
                                             onChange={(e) => this.setState({ hostName: e.target.value })}
                                             margin="normal"
@@ -162,7 +162,6 @@ class CreateGroupBox extends React.Component{
                                         <CssTextField
                                             id="standard-activity"
                                             label="Activity*"
-                                            className={classes.textField}
                                             value={this.state.activity}
                                             onChange={(e) => this.setState({ activity: e.target.value })}
                                             margin="normal"
@@ -257,6 +256,22 @@ class CreateGroupBox extends React.Component{
                 this.setState({ counterValue: this.state.counterValue + value })
             }
         }
+    }
+
+    _saveGroup = (hostname, activity, notes, experience) => {
+        API.put('/group/', { host_username: hostname, name: activity }).then(res => {
+            this.setState({ errorMessage: undefined, groupPosted: true })
+        }).catch(error => {
+            this.setState({
+                errorMessage: "An error occured!  Group was not able to be posted.",
+                hostname: undefined,
+                activity: undefined,
+                notes: undefined,
+                experience: undefined,
+                groupPosted: false
+            })
+            console.log(error)
+        })
     }
 }
 

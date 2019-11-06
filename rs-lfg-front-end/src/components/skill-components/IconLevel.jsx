@@ -27,7 +27,7 @@ const styles = ({
 function IconLevel({ icon, level, classes }){
     return (
         <div className={classes.root}>
-            <img className={classes.img} src={icon}></img>
+            <img className={classes.img} src={icon} alt=""></img>
             <p className={classes.label}>{level}</p>
         </div>
     )

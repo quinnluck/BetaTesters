@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import Label from "./shared-components/Label";
 import GroupRow from "./shared-components/GroupRow";
+import API from "../utils/API";
 
 
 
@@ -24,10 +25,15 @@ class GroupListings extends React.Component {
         super(props)
 
         this.state = {
-
+            errorMessage: undefined,
+            groups: undefined
         }
     }
 
+
+    componentDidMount() {
+        this._lookupGroups()
+    }
 
 
     render() {
@@ -39,6 +45,22 @@ class GroupListings extends React.Component {
                 <GroupRow />
             </Container>
         )
+    }
+
+    _lookupGroups = () => {
+        API.get(`/groups`).then(res => {
+
+
+            console.log("groups: " + res.data)
+
+            this.setState({ errorMessage: undefined, groups: res.data })
+        }).catch(error => {
+            this.setState({
+                errorMessage: "RsLFG groups had trouble loading",
+                groups: undefined
+            })
+            console.log("error: " + error)
+        })
     }
 }
 

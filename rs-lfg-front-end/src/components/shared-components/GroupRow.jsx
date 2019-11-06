@@ -5,6 +5,7 @@ import {
     Container,
     Grid
 } from "@material-ui/core";
+import API from "../../utils/API";
 
 const styles = {
     root: {
@@ -27,16 +28,35 @@ class GroupRow extends React.Component {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs={3}>
                         <div>pull group info from DB</div>
-
                     </Grid>
+
                     <Grid item xs={9}>
                         <div>notes go here</div>
-
                     </Grid>
                 </Grid>
             </Container>
 
         )
+    }
+
+    componentDidMount() {
+        API.get(`/groups/`).then(res => {
+
+            var stats = res.data.split('\n')
+            var splitStats = stats.map(stat => stat.split(','))
+
+            console.log("stats: " + splitStats)
+
+            this.setState({errorMessage: undefined, playerStats: splitStats, username: this.state.usernameInput})
+        }).catch(error => {
+            this.setState({
+                errorMessage: "User not found!  Membership is needed for hiscores, or user was misspelled.",
+                username: '',
+                playerStats: undefined
+            })
+            console.log("error: " + error)
+        })
+
     }
 }
 

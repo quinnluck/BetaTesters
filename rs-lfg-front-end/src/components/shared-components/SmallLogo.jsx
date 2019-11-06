@@ -11,7 +11,7 @@ const styles = ({
 
 function SmallLogo({ icon, classes }){
 
-    return(<img className={classes.root} src={icon}></img>)
+    return(<img className={classes.root} src={icon} alt=""></img>)
 }
 
 export default withStyles(styles)(SmallLogo)
