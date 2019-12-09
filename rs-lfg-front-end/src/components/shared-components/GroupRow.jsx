@@ -6,18 +6,44 @@ import {
     Grid
 } from "@material-ui/core";
 import API from "../../utils/API";
+import Label from "./Label";
+import Moment from "moment";
 
 const styles = {
     root: {
-        marginBottom: '5%',
-        marginTop: '5%',
+        marginBottom: '2.5%',
+        marginTop: '2.5%',
         backgroundColor: '#14161A',
         border: '1px solid #000',
         borderRadius: '5px',
+        height: '100px'
+    },
+    groupSection: {
+        textAlign: 'left'
+    },
+    dateSection: {
+        textAlign: 'right'
+    },
+    hostText: {
+        fontSize: '20px'
+    },
+    dateText: {
+        fontSize: '15px'
     }
 };
 
 class GroupRow extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            groups: undefined,
+            errorMessage: undefined
+        }
+
+        this.pullGroupsFromBackend()
+    }
 
 
     render() {
@@ -26,37 +52,51 @@ class GroupRow extends React.Component {
         return (
             <Container className={classes.root} maxWidth="md">
                 <Grid container direction="row" justify="center" alignItems="center">
-                    <Grid item xs={3}>
-                        <div>pull group info from DB</div>
-                    </Grid>
+                    { this.state.groups && this.state.groups.map( group => {
+                        return (
+                            <React.Fragment>
+                                <Grid item xs={3} className={classes.groupSection}>
+                                    <Label>{group.name}</Label>
+                                    <Label className={classes.hostText}>Host: {group.host_username}</Label>
+                                </Grid>
 
-                    <Grid item xs={9}>
-                        <div>notes go here</div>
-                    </Grid>
+                                <Grid item xs={7}>
+                                    <Label>{group.notes}</Label>
+                                </Grid>
+
+                                <Grid item xs={2} className={classes.dateSection}>
+                                    <Label className={classes.dateText}>{group.date_created}</Label>
+                                </Grid>
+                            </React.Fragment>
+                        )
+                    })
+                    }
                 </Grid>
             </Container>
-
         )
     }
 
-    componentDidMount() {
+
+
+    pullGroupsFromBackend() {
         API.get(`/groups/`).then(res => {
 
-            var stats = res.data.split('\n')
-            var splitStats = stats.map(stat => stat.split(','))
+            var groupData = res.data
 
-            console.log("stats: " + splitStats)
+            groupData.map( group => {
+                group.date_created = Moment(group.date_created).fromNow()
+            })
 
-            this.setState({errorMessage: undefined, playerStats: splitStats, username: this.state.usernameInput})
+            console.log("groups: " + groupData)
+
+            this.setState({ errorMessage: undefined, groups: groupData })
         }).catch(error => {
             this.setState({
-                errorMessage: "User not found!  Membership is needed for hiscores, or user was misspelled.",
-                username: '',
-                playerStats: undefined
+                errorMessage: "Problem loading groups!",
+                groups: undefined
             })
             console.log("error: " + error)
         })
-
     }
 }
 
