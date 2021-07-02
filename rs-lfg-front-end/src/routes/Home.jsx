@@ -34,7 +34,7 @@ const styles = ({
     },
     content: {
         height: '100%',
-        marginTop: '70px',
+        marginTop: '5%',
         backgroundColor: 'rgb(40,44,52,0.8)'
     }
 });
@@ -110,10 +110,10 @@ class Home extends React.Component{
                 </AppBarBlack>
                 
                 {this.state.tabSelected === "rs3" &&
-                    <Container className={classes.content} maxWidth="md">
+                    <Container className={classes.content} maxWidth="lg">
                         <CharacterClaimBox />
                         <CreateGroupBox />
-                        <GroupListings />
+                        {/* <GroupListings /> */}
                     </Container>
                 }
 

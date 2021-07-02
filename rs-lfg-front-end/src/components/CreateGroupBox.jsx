@@ -15,6 +15,7 @@ import {
 
 import Label from './shared-components/Label'
 import API from "../utils/API";
+import GroupListings from './GroupListings';
 
 
 
@@ -90,6 +91,7 @@ const SherpaButton = withStyles({
 const styles = {
     root: {
         marginTop: '5%',
+        marginBottom: '5%',
         backgroundColor: '#2D323B',
         border: '1px solid #000',
         borderRadius: '5px',
@@ -241,6 +243,8 @@ class CreateGroupBox extends React.Component{
                     </Grid>
                 </Grid>
 
+                <GroupListings />
+
             </Container>
         )
     }
@@ -258,21 +262,21 @@ class CreateGroupBox extends React.Component{
         }
     }
 
-    _saveGroup = (hostname, activity, notes, experience) => {
-        API.put('/group/', { host_username: hostname, name: activity }).then(res => {
-            this.setState({ errorMessage: undefined, groupPosted: true })
-        }).catch(error => {
-            this.setState({
-                errorMessage: "An error occured!  Group was not able to be posted.",
-                hostname: undefined,
-                activity: undefined,
-                notes: undefined,
-                experience: undefined,
-                groupPosted: false
-            })
-            console.log(error)
-        })
-    }
+    // _saveGroup = (hostname, activity, notes, experience) => {
+    //     API.put('/group/', { host_username: hostname, name: activity }).then(res => {
+    //         this.setState({ errorMessage: undefined, groupPosted: true })
+    //     }).catch(error => {
+    //         this.setState({
+    //             errorMessage: "An error occured!  Group was not able to be posted.",
+    //             hostname: undefined,
+    //             activity: undefined,
+    //             notes: undefined,
+    //             experience: undefined,
+    //             groupPosted: false
+    //         })
+    //         console.log(error)
+    //     })
+    // }
 }
 
 export default withStyles(styles)(CreateGroupBox)

@@ -31,9 +31,9 @@ class GroupListings extends React.Component {
     }
 
 
-    componentDidMount() {
-        this._lookupGroups()
-    }
+    // componentDidMount() {
+    //     this._lookupGroups()
+    // }
 
 
     render() {
