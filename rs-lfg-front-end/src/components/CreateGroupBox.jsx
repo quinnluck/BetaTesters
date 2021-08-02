@@ -14,9 +14,7 @@ import {
 } from '@material-ui/core';
 
 import Label from './shared-components/Label'
-import API from "../utils/API";
 import GroupListings from './GroupListings';
-
 
 
 const CssTextField = withStyles({
@@ -87,7 +85,6 @@ const SherpaButton = withStyles({
 })(props => <Radio color="default" {...props} />)
 
 
-
 const styles = {
     root: {
         marginTop: '5%',
@@ -125,21 +122,18 @@ const styles = {
 };
 
 class CreateGroupBox extends React.Component{
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            counterValue: 1,
-            hostName: undefined,
-            activity: undefined,
-            notes: undefined,
-            experience: undefined,
-        }
+    state = {
+        currentGroupId: 1,
+        hostName: '',
+        activity: '',
+        notes: '',
+        experience: '',
+        groups: []
     }
 
     render(){
         const { classes } = this.props
-        var { hostName, activity, experience } = this.state
+        var { currentGroupId, hostName, activity, notes, experience, groups } = this.state
 
         return(
             <Container className={classes.root} maxWidth="md">
@@ -154,7 +148,7 @@ class CreateGroupBox extends React.Component{
                                         <CssTextField
                                             id="standard-host"
                                             label="Host*"
-                                            value={this.state.hostName}
+                                            value={hostName}
                                             onChange={(e) => this.setState({ hostName: e.target.value })}
                                             margin="normal"
                                             variant="filled"
@@ -164,7 +158,7 @@ class CreateGroupBox extends React.Component{
                                         <CssTextField
                                             id="standard-activity"
                                             label="Activity*"
-                                            value={this.state.activity}
+                                            value={activity}
                                             onChange={(e) => this.setState({ activity: e.target.value })}
                                             margin="normal"
                                             variant="filled"
@@ -176,27 +170,31 @@ class CreateGroupBox extends React.Component{
                                 <Grid container direction="row" justify="center" alignItems="center">
                                     <Grid item xs={12}>
                                         <FormControl className={classes.button_group} component="fieldset">
-                                            <FormLabel className={classes.experience_group} component="legend">
+                                            <FormLabel key="exp_label" className={classes.experience_group} component="legend">
                                                 <Label className={classes.legend_label}>Experience*</Label>
                                             </FormLabel>
                                             <RadioGroup
-                                                value={this.state.experience}
+                                                key="radio_Btn_Group"
+                                                value={experience}
                                                 onChange={(e) => this.setState({ experience: e.target.value })}
                                                 row
                                             >
                                                 <NoviceFormControlLabel
+                                                    key="novice_button"
                                                     value="novice"
                                                     control={<NoviceButton />}
                                                     label="Novice"
                                                     labelPlacement="bottom"
                                                 />
                                                 <IntermediateFormControlLabel
+                                                    key="int_button"
                                                     value="intermediate"
                                                     control={<IntermediateButton />}
                                                     label="Intermediate"
                                                     labelPlacement="bottom"
                                                 />
                                                 <SherpaFormControlLabel
+                                                    key="sherpa_button"
                                                     value="sherpa"
                                                     control={<SherpaButton />}
                                                     label="Sherpa"
@@ -220,7 +218,7 @@ class CreateGroupBox extends React.Component{
                                     multiline
                                     rows="6"
                                     className={classes.textField}
-                                    value={this.state.notes}
+                                    value={notes}
                                     onChange={(e) => this.setState({ notes: e.target.value })}
                                     margin="normal"
                                     variant="filled"
@@ -235,48 +233,34 @@ class CreateGroupBox extends React.Component{
                             className={classes.stats_button}
                             variant="contained"
                             color="primary"
-                            onClick={() => {}}
+                            onClick={() => this._addGroup(groups, currentGroupId, hostName, activity, experience)}
                             disabled={hostName && activity && experience ? false : true}
                         >
                             List Group
-                            </Button>
+                        </Button>
                     </Grid>
                 </Grid>
 
-                <GroupListings />
+                <GroupListings groupListings={groups} />
 
             </Container>
         )
     }
 
-
-    _addToCounter = (value) => {
-        if(value < 0) {
-            if(this.state.counterValue > 1) {
-                this.setState({ counterValue: this.state.counterValue + value })
+    _addGroup = (currentGroups, currentGroupId, hostName, activity, experience) => {
+        this.setState(
+            {
+                groups: [ 
+                    ...currentGroups, 
+                    { id: currentGroupId,
+                    hostName,
+                    activity,
+                    experience }
+                ],
+                currentGroupId: this.state.currentGroupId + 1
             }
-        } else {
-            if(this.state.counterValue < 10) {
-                this.setState({ counterValue: this.state.counterValue + value })
-            }
-        }
+        )
     }
-
-    // _saveGroup = (hostname, activity, notes, experience) => {
-    //     API.put('/group/', { host_username: hostname, name: activity }).then(res => {
-    //         this.setState({ errorMessage: undefined, groupPosted: true })
-    //     }).catch(error => {
-    //         this.setState({
-    //             errorMessage: "An error occured!  Group was not able to be posted.",
-    //             hostname: undefined,
-    //             activity: undefined,
-    //             notes: undefined,
-    //             experience: undefined,
-    //             groupPosted: false
-    //         })
-    //         console.log(error)
-    //     })
-    // }
 }
 
 export default withStyles(styles)(CreateGroupBox)

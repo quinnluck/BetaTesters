@@ -5,9 +5,8 @@ import {
     Container,
     Grid
 } from "@material-ui/core";
-import API from "../../utils/API";
 import Label from "./Label";
-import Moment from "moment";
+// import Moment from "moment";
 
 const styles = {
     root: {
@@ -32,72 +31,34 @@ const styles = {
     }
 };
 
-class GroupRow extends React.Component {
+const GroupRow = ({ classes, id, hostName, activity, experience }) => {
+    return (
+        <Container className={classes.root} maxWidth="md">
+            <Grid container direction="row" justify="center" alignItems="center">
+                <React.Fragment>
+                    <Grid item xs={3} className={classes.groupSection}>
+                        <Label>Id:</Label>
+                        <Label className={classes.hostText}>{id}</Label>
+                    </Grid>
 
-    constructor(props) {
-        super(props);
+                    <Grid item xs={3} className={classes.groupSection}>
+                        <Label>Host Name:</Label>
+                        <Label className={classes.hostText}>{hostName}</Label>
+                    </Grid>
 
-        this.state = {
-            groups: undefined,
-            errorMessage: undefined
-        }
+                    <Grid item xs={3} className={classes.groupSection}>
+                        <Label>Activity:</Label>
+                        <Label className={classes.hostText}>{activity}</Label>
+                    </Grid>
 
-        this.pullGroupsFromBackend()
-    }
-
-
-    render() {
-        var { classes } = this.props
-
-        return (
-            <Container className={classes.root} maxWidth="md">
-                <Grid container direction="row" justify="center" alignItems="center">
-                    { this.state.groups && this.state.groups.map( group => {
-                        return (
-                            <React.Fragment>
-                                <Grid item xs={3} className={classes.groupSection}>
-                                    <Label>{group.name}</Label>
-                                    <Label className={classes.hostText}>Host: {group.host_username}</Label>
-                                </Grid>
-
-                                <Grid item xs={7}>
-                                    <Label>{group.notes}</Label>
-                                </Grid>
-
-                                <Grid item xs={2} className={classes.dateSection}>
-                                    <Label className={classes.dateText}>{group.date_created}</Label>
-                                </Grid>
-                            </React.Fragment>
-                        )
-                    })
-                    }
-                </Grid>
-            </Container>
-        )
-    }
-
-
-
-    pullGroupsFromBackend() {
-        API.get(`/groups/`).then(res => {
-
-            var groupData = res.data
-
-            groupData.map( group => {
-                group.date_created = Moment(group.date_created).fromNow()
-            })
-
-            console.log("groups: " + groupData)
-
-            this.setState({ errorMessage: undefined, groups: groupData })
-        }).catch(error => {
-            this.setState({
-                errorMessage: "Problem loading groups!",
-                groups: undefined
-            })
-            console.log("error: " + error)
-        })
-    }
+                    <Grid item xs={3} className={classes.groupSection}>
+                        <Label>Experience:</Label>
+                        <Label className={classes.hostText}>{experience}</Label>
+                    </Grid>
+                </React.Fragment>                    
+            </Grid>
+        </Container>
+    )
 }
 
 export default withStyles(styles)(GroupRow)

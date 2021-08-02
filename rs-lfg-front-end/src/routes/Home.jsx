@@ -2,7 +2,6 @@ import React from 'react'
 
 import CharacterClaimBox from '../components/CharacterClaimBox'
 import CreateGroupBox from '../components/CreateGroupBox'
-import GroupListings from '../components/GroupListings'
 
 import { 
     BottomNavigation,
@@ -113,7 +112,6 @@ class Home extends React.Component{
                     <Container className={classes.content} maxWidth="lg">
                         <CharacterClaimBox />
                         <CreateGroupBox />
-                        {/* <GroupListings /> */}
                     </Container>
                 }
 
