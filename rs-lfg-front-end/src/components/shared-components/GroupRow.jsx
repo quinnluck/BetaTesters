@@ -5,6 +5,9 @@ import {
     Container,
     Grid
 } from "@material-ui/core";
+
+import { DataGrid } from '@material-ui/data-grid';
+
 import Label from "./Label";
 // import Moment from "moment";
 
@@ -31,9 +34,26 @@ const styles = {
     }
 };
 
+const columns = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'hostName', headerName: 'Host Name', width: 150 },
+    { field: 'activity', headerName: 'Activity', width: 150 },
+    { field: 'experience', headerName: 'Experience', width: 90 }
+];
+
 const GroupRow = ({ classes, id, hostName, activity, experience }) => {
+
+    const row = { id, hostName, activity, experience };
+
     return (
         <Container className={classes.root} maxWidth="md">
+            <DataGrid 
+                rows={row}
+                columns={columns}
+                pageSize={10}
+                disableSelectionOnClick
+            />
+{/*             
             <Grid container direction="row" justify="center" alignItems="center">
                 <React.Fragment>
                     <Grid item xs={3} className={classes.groupSection}>
@@ -56,7 +76,7 @@ const GroupRow = ({ classes, id, hostName, activity, experience }) => {
                         <Label className={classes.hostText}>{experience}</Label>
                     </Grid>
                 </React.Fragment>                    
-            </Grid>
+            </Grid> */}
         </Container>
     )
 }
