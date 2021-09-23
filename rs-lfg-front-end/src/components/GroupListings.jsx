@@ -23,20 +23,14 @@ const styles = {
         borderRadius: '5px',
     },
     table: {
-        marginBottom: '2.5%',
-        // marginTop: '2.5%',
-        //backgroundColor: '#14161A',
-        backgroundColor: '#1F1F1F',
-        border: '1px solid lightGray',
-        borderRadius: '7px',
-        minHeight: '100%',
-        color: 'gray'
+        marginBottom: '5%'
     }
 };
 
 const HeaderTableCell = withStyles({
     root: {
         fontSize: '16px',
+        fontStyle: 'Bold',
         borderRight: '1px solid lightGray',
     }
 })(TableCell);
@@ -66,15 +60,15 @@ const GroupListings = ({ classes, groupListings }) => {
     return(
         <Container className={classes.root} maxWidth="md">
             <Label>Group Listings</Label>
-            <Paper variant="outlined" sx={{ width: '100%', overflow: 'hidden' }}>
+            <Paper variant="outlined" className={classes.table}>
                 <TableContainer>
                     <Table stickyHeader>
                         <TableHead>
                             <TableRow>
                                 <HeaderTableCell width={50}>ID</HeaderTableCell>
-                                <HeaderTableCell align="center">Host Name</HeaderTableCell>
+                                <HeaderTableCell width={150} align="center">Host Name</HeaderTableCell>
                                 <HeaderTableCell align="center">Activity</HeaderTableCell>
-                                <LastCell align="center" width={150}>Experience</LastCell>
+                                <LastCell align="center" width={120}>Experience</LastCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

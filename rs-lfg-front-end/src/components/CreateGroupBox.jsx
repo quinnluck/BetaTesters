@@ -10,7 +10,8 @@ import {
     FormLabel,
     TextField,
     Radio,
-    RadioGroup
+    RadioGroup,
+    Select
 } from '@material-ui/core';
 
 import Label from './shared-components/Label'
@@ -57,6 +58,12 @@ const SherpaFormControlLabel = withStyles({
     }
 })(FormControlLabel)
 
+const ExpertFormControlLabel = withStyles({
+    root: {
+        color: 'darkcyan'
+    }
+})(FormControlLabel)
+
 const NoviceButton = withStyles({
     root: {
         color: 'green',
@@ -80,6 +87,15 @@ const SherpaButton = withStyles({
         color: 'yellow',
         '&:hover': {
             backgroundColor: 'rgb(255,255,160,0.2)'
+        }
+    }
+})(props => <Radio color="default" {...props} />)
+
+const ExpertButton = withStyles({
+    root: {
+        color: 'darkcyan',
+        '&:hover': {
+            backgroundColor: 'rgb(0,139,139,0.2)'
         }
     }
 })(props => <Radio color="default" {...props} />)
@@ -155,6 +171,14 @@ class CreateGroupBox extends React.Component{
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
+                                        <Select
+                                            id="activity-select"
+                                            value={activity}
+                                            onChange={(e) => this.setState({ activity: e.target.value })}
+                                            label="Activity*"
+                                        >
+                                    
+                                        </Select>
                                         <CssTextField
                                             id="standard-activity"
                                             label="Activity*"
@@ -181,21 +205,28 @@ class CreateGroupBox extends React.Component{
                                             >
                                                 <NoviceFormControlLabel
                                                     key="novice_button"
-                                                    value="novice"
+                                                    value="Novice"
                                                     control={<NoviceButton />}
                                                     label="Novice"
                                                     labelPlacement="bottom"
                                                 />
                                                 <IntermediateFormControlLabel
                                                     key="int_button"
-                                                    value="intermediate"
+                                                    value="Intermediate"
                                                     control={<IntermediateButton />}
                                                     label="Intermediate"
                                                     labelPlacement="bottom"
                                                 />
+                                                <ExpertFormControlLabel
+                                                    key="expert_button"
+                                                    value="Expert"
+                                                    control={<ExpertButton />}
+                                                    label="Expert"
+                                                    labelPlacement="bottom"
+                                                />
                                                 <SherpaFormControlLabel
                                                     key="sherpa_button"
-                                                    value="sherpa"
+                                                    value="Sherpa"
                                                     control={<SherpaButton />}
                                                     label="Sherpa"
                                                     labelPlacement="bottom"
